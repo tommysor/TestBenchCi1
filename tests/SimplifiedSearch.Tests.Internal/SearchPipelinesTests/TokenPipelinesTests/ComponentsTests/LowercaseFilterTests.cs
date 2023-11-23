@@ -18,7 +18,7 @@ namespace SimplifiedSearch.Tests.Internal.SearchPipelineTests.TokenPipelinesTest
         [Fact]
         public async Task LowercaseFilterSimple()
         {
-            var actual = await _lowercaseFilter.RunAsync("A");
+            var actual =  _lowercaseFilter.RunAsync("A");
 
             Assert.Single(actual, "a");
         }
@@ -26,7 +26,7 @@ namespace SimplifiedSearch.Tests.Internal.SearchPipelineTests.TokenPipelinesTest
         [Fact]
         public async Task LowercaseFilterSimpleList()
         {
-            var actual = await _lowercaseFilter.RunAsync("aAa", "BBB");
+            var actual =  _lowercaseFilter.RunAsync("aAa", "BBB");
 
             var expected = new[] { "aaa", "bbb" };
             AssertCollectionUtils.AssertCollectionContainsSameInSameOrder(expected, actual);

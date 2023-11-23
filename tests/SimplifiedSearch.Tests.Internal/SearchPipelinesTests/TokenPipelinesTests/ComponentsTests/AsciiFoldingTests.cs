@@ -20,7 +20,7 @@ namespace SimplifiedSearch.Tests.Internal.SearchPipelineTests.TokenPipelinesTest
         {
             var input = "ü";
 
-            var actual = await _asciiFoldingFilter.RunAsync(input);
+            var actual =  _asciiFoldingFilter.RunAsync(input);
 
             Assert.Single(actual, "u");
         }
@@ -30,7 +30,7 @@ namespace SimplifiedSearch.Tests.Internal.SearchPipelineTests.TokenPipelinesTest
         {
             var input = new[] { "â", "ß" };
 
-            var actual = await _asciiFoldingFilter.RunAsync(input);
+            var actual =  _asciiFoldingFilter.RunAsync(input);
 
             var expected = new[] { "a", "ss" };
             AssertCollectionUtils.AssertCollectionContainsSameInSameOrder(expected, actual);

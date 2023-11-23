@@ -7,14 +7,12 @@ namespace SimplifiedSearch.SearchPipelines.TokenPipelines.Components
 {
     internal class LowercaseFilter : ITokenPipelineComponent
     {
-        public Task<string[]> RunAsync(params string[] value)
+        public string[] RunAsync(params string[] value)
         {
-            var results = new string[value.Length];
-
             for (var i = 0; i < value.Length; i++)
-                results[i] = value[i].ToLower();
-
-            return Task.FromResult(results);
+                value[i] = value[i].ToLower();
+ 
+            return value;
         }
     }
 }

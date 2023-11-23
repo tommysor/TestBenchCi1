@@ -7,6 +7,6 @@ namespace SimplifiedSearch.SearchPipelines.TokenPipelines.Components
 {
     internal interface ITokenPipelineComponent
     {
-        Task<string[]> RunAsync(string[] value);
+        string[] RunAsync(string[] value);
     }
 }

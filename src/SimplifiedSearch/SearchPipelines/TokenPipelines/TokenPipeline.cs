@@ -20,7 +20,7 @@ namespace SimplifiedSearch.SearchPipelines.TokenPipelines
             var valueLocal = new[] { value };
             foreach (var component in _tokenPipelineComponents)
             {
-                valueLocal = await component.RunAsync(valueLocal);
+                valueLocal = component.RunAsync(valueLocal);
             }
 
             return valueLocal;
