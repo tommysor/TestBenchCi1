@@ -11,10 +11,12 @@ namespace SimplifiedSearch.SearchPipelines.TokenPipelines.Components
         public string[] RunAsync(params string[] value)
         {
             var len = value.Length;
+            var result = new List<string>();
             for (var i = 0; i < len; i++)
             {
                 var asciiString = value[i].Unidecode();
-                value[i] = asciiString;
+                // value[i] = asciiString;
+                result.Add(asciiString);
             }
 
             return value;
