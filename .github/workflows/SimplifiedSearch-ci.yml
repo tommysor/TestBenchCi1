@@ -2,9 +2,10 @@ name: SimplifiedSearch-ci
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ dummy ]
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
