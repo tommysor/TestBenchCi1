@@ -1,0 +1,35 @@
+name: Benchmarks-ci
+on:
+  push:
+    branches: main
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    name: Performance regression check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Run benchmark with `go test -bench` and stores the output to a file
+      - name: Run benchmark
+        #run: dotnet test -bench 'BenchmarkFib' | tee output.txt
+        run: cd benchmarks/Benchmark && dotnet run --configuration Release --exporters json --filter '*'
+      # Download previous benchmark result from cache (if exists)
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
+      # Run `github-action-benchmark` action
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'benchmarkdotnet'
+          # Where the output from the benchmark tool is stored
+          output-file-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Sample.Benchmarks-report-full-compressed.json
+          # Where the previous data file is stored
+          external-data-json-path: ./cache/benchmark-data.json
+          # Workflow will fail when an alert happens
+          fail-on-alert: true
+      # Upload the updated cache file for the next job by actions/cache

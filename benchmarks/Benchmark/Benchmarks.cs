@@ -7,25 +7,25 @@ using SimplifiedSearch;
 
 namespace Benchmark
 {
-    [Config(typeof(Config))]
+    // [Config(typeof(Config))]
     [MemoryDiagnoser]
     // [RPlotExporter]
     public class Benchmarks
     {
-        private class Config : ManualConfig
-        {
-            public Config()
-            {
-                var baseJob = Job.MediumRun.WithMaxIterationCount(25);
-                // AddJob(baseJob);
+        // private class Config : ManualConfig
+        // {
+        //     public Config()
+        //     {
+        //         var baseJob = Job.MediumRun.WithMaxIterationCount(25);
+        //         // AddJob(baseJob);
 
-                // AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.0.0").WithId("1.0.0"));
-                // AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.2.0").WithId("1.2.0"));
-                AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.3.0-beta1").WithId("1.3.0"));
+        //         // AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.0.0").WithId("1.0.0"));
+        //         // AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.2.0").WithId("1.2.0"));
+        //         AddJob(baseJob.WithNuGet("SimplifiedSearch", "1.3.0-beta1").WithId("1.3.0"));
                 
-                AddJob(baseJob.WithCustomBuildConfiguration("LocalBuild").WithId("LocalBuild"));
-            }
-        }
+        //         AddJob(baseJob.WithCustomBuildConfiguration("LocalBuild").WithId("LocalBuild"));
+        //     }
+        // }
 
         private class Person
         {

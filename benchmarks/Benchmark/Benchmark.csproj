@@ -12,12 +12,8 @@
     <PackageReference Include="Bogus" Version="34.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(Configuration)' != 'LocalBuild' ">
-    <PackageReference Include="SimplifiedSearch" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(Configuration)' == 'LocalBuild' ">
-    <ProjectReference Include="..\..\src\SimplifiedSearch\SimplifiedSearch.csproj" />
+  <ItemGroup>
+    <ProjectReference Include="../../src/SimplifiedSearch/SimplifiedSearch.csproj" />
   </ItemGroup>
 
 </Project>
