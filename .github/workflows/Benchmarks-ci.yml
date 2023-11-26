@@ -20,6 +20,8 @@ jobs:
         with:
           path: ./cache
           key: ${{ runner.os }}-benchmark
+      - name: ListFiles
+        run: tree
       # Run `github-action-benchmark` action
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
