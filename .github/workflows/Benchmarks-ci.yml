@@ -35,3 +35,6 @@ jobs:
           # Workflow will fail when an alert happens
           fail-on-alert: true
       # Upload the updated cache file for the next job by actions/cache
+
+      - name: ListFiles
+        run: tree
