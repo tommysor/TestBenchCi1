@@ -1,0 +1,5 @@
+{
+    "csharp.suppressBuildAssetsNotification": true,
+    "git.autofetch": true,
+    "dotnet.defaultSolution": "SimplifiedSearch.sln"
+}

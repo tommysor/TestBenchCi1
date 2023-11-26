@@ -1,0 +1,18 @@
+{
+    "stryker-config": {
+        "ignore-methods": [
+            "ConfigureAwait"
+        ],
+        "thresholds": {
+            "high": 97,
+            "low": 90,
+            "break": 90
+        },
+        "reporters": [
+            "dashboard"
+        ],
+        "project-info": { 
+            "name": "github.com/tommysor/SimplifiedSearch"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+name: SimplifiedSearch-release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  BuildConfiguration: Release
+
+jobs:
+  release:
+    permissions:
+      packages: write
+      contents: read
+      
+    runs-on: 'ubuntu-22.04'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET 6.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Setup .NET 7.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build -c ${{ env.BuildConfiguration }} --no-restore
+      
+    - name: Test
+      run: dotnet test -c ${{ env.BuildConfiguration }} --no-build
+      
+    - name: Pack
+      run: dotnet pack -c ${{ env.BuildConfiguration }} --no-build -p:PackageVersion=$GITHUB_REF_NAME
+
+    - name: NuGetPublish
+      env:
+        NUGET_TOKEN: ${{ secrets.NUGET_PUBLISH_NEW_VERSION_TOKEN }}
+      run: dotnet nuget push ${{ github.workspace }}/**/*.nupkg -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
