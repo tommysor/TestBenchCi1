@@ -19,7 +19,10 @@ jobs:
 
           git checkout main
           dotnet run --configuration Release --filter '*'
-          
+
+      - name: List files
+        run: tree
+
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
