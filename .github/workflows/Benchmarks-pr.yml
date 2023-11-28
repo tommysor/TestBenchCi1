@@ -36,3 +36,4 @@ jobs:
           fail-on-alert: true
           summary-always: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          save-data-file: false
