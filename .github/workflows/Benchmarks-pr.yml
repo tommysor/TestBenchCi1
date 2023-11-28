@@ -17,12 +17,31 @@ jobs:
           dotnet run --configuration Release --filter '*'
           mv BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
 
-        #   git checkout main
-        #   dotnet run --configuration Release --filter '*'
+          git checkout main
+          dotnet run --configuration Release --filter '*'
 
       - name: List files
         run: tree
 
+      - name: Store benchmark result main
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'benchmarkdotnet'
+          # Where the output from the benchmark tool is stored
+          output-file-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
+          # Where the previous data file is stored
+        #   external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
+        #   save-data-file: false
+          skip-fetch-gh-pages: true
+          gh-pages-branch: main
+          # Workflow will fail when an alert happens
+          #fail-on-alert: true
+          #summary-always: true
+          #github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+
+## dev/bench/data.js
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
         with:
@@ -31,12 +50,11 @@ jobs:
           # Where the output from the benchmark tool is stored
           output-file-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
           # Where the previous data file is stored
-        #   external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
-        #   save-data-file: false
+          #external-data-json-path: dev/bench/data.js
+          #   save-data-file: false
           skip-fetch-gh-pages: true
           gh-pages-branch: main
           # Workflow will fail when an alert happens
           fail-on-alert: true
           summary-always: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          
