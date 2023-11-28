@@ -33,7 +33,7 @@ namespace SimplifiedSearch.SearchPipelines
 
         private async Task<IList<T>> SearchAsync2<T>(IList<T> list, string searchTerm, Func<T, string?> fieldToSearch)
         {
-            await Task.Delay(2000);
+            await Task.Delay(2500);
             var listWithRank = await _similarityRankPipeline.RunAsync(list, searchTerm, fieldToSearch);
 
             var results = await _resultSelector.RunAsync(listWithRank);
