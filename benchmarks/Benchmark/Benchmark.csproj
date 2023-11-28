@@ -12,8 +12,12 @@
     <PackageReference Include="Bogus" Version="34.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' != 'main' ">
     <ProjectReference Include="../../src/SimplifiedSearch/SimplifiedSearch.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Configuration)' == 'main' ">
+    <ProjectReference Include="../../../Main/TestBenchCi1/src/SimplifiedSearch/SimplifiedSearch.csproj" />
   </ItemGroup>
 
 </Project>

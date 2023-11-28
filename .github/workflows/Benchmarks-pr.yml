@@ -1,0 +1,35 @@
+name: Benchmarks-pr
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  benchmark:
+    name: Performance regression check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: RunBenchmark
+        run: |
+          cd benchmarks/Benchmark
+          dotnet run --configuration Release --filter '*'
+          mv BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
+
+          git checkout main
+          dotnet run --configuration Release --filter '*'
+          
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'benchmarkdotnet'
+          # Where the output from the benchmark tool is stored
+          output-file-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
+          # Where the previous data file is stored
+          external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
+          # Workflow will fail when an alert happens
+          fail-on-alert: true
+          summary-always: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
