@@ -17,8 +17,8 @@ jobs:
           dotnet run --configuration Release --filter '*'
           mv BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
 
-          git checkout main
-          dotnet run --configuration Release --filter '*'
+        #   git checkout main
+        #   dotnet run --configuration Release --filter '*'
 
       - name: List files
         run: tree
@@ -31,9 +31,10 @@ jobs:
           # Where the output from the benchmark tool is stored
           output-file-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed-pr.json
           # Where the previous data file is stored
-          external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
+        #   external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
+        #   save-data-file: false
           # Workflow will fail when an alert happens
           fail-on-alert: true
           summary-always: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          save-data-file: false
+          
