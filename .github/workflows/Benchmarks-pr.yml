@@ -41,7 +41,11 @@ jobs:
           #fail-on-alert: true
           #summary-always: true
           #github-token: ${{ secrets.GITHUB_TOKEN }}
-          
+      - name: CatTestExternalData
+        run: cat testExternalData.json
+
+      - name: SwitchBranch
+        run: git checkout ${{ github.event.pull_request.head.ref }}
 
 ## dev/bench/data.js
       - name: Store benchmark result
@@ -67,5 +71,5 @@ jobs:
 
       - name: List files
         run: tree
-      - name: List files
+      - name: CatTestExternalData
         run: cat testExternalData.json
