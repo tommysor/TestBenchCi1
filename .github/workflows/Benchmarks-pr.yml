@@ -34,6 +34,7 @@ jobs:
         #   external-data-json-path: benchmarks/Benchmark/BenchmarkDotNet.Artifacts/results/Benchmark.Benchmarks-report-full-compressed.json
         #   save-data-file: false
           skip-fetch-gh-pages: true
+          gh-pages-branch: main
           # Workflow will fail when an alert happens
           fail-on-alert: true
           summary-always: true
